@@ -180,31 +180,40 @@ if uploaded_file:
 
         with st.spinner("Analyzing paper..."):
 
-            response = model.generate_content(
-                f"""
-                Analyze the following research paper.
+            try:
 
-                Return your response in the exact format:
+                response = model.generate_content(
 
-                SUMMARY:
-                <summary>
+                    f"""
+                    Analyze the following research paper.
 
-                KEY CONTRIBUTIONS:
-                <bullet points>
+                    Return your response in the exact format:
 
-                LIMITATIONS:
-                <bullet points>
+                    SUMMARY:
+                    <summary>
 
-                FUTURE WORK:
-                <bullet points>
+                    KEY CONTRIBUTIONS:
+                    <bullet points>
 
-                Paper:
+                    LIMITATIONS:
+                    <bullet points>
 
-                {text[:10000]}
-                """
-            )
+                    FUTURE WORK:
+                    <bullet points>
 
-            st.session_state.analysis = response.text
+                    Paper:
+
+                    {text[:30000]}
+                    """
+                )
+
+                st.session_state.analysis = response.text
+
+            except Exception as e:
+
+                st.error(
+                    "Gemini quota exceeded or API error. Please try again later."
+                )
 
 if st.session_state.analysis:
 
@@ -280,30 +289,38 @@ if st.session_state.analysis:
 
         with st.spinner("Thinking..."):
 
-            model = genai.GenerativeModel("gemini-2.5-flash")
+            try:
 
-            response = model.generate_content(
-                f"""
-                You are helping a student understand a research paper.
+                model = genai.GenerativeModel("gemini-2.5-flash")
 
-                Research Paper:
+                response = model.generate_content(
+                    f"""
+                    You are helping a student understand a research paper.
 
-                {st.session_state.paper_text[:10000]}
+                    Research Paper:
 
-                Question:
+                    {st.session_state.paper_text[:10000]}
 
-                {question}
+                    Question:
 
-                Answer clearly and accurately.
-                """
-            )
+                    {question}
 
-            st.session_state.chat_history.append(
-                {
-                    "question": question,
-                    "answer": response.text
-                }
-            )
+                    Answer clearly and accurately.
+                    """
+                )
+
+                st.session_state.chat_history.append(
+                    {
+                        "question": question,
+                        "answer": response.text
+                    }
+                )
+
+            except Exception as e:
+
+                st.error(
+                    "Gemini quota exceeded or API error. Please try again later."
+                )
 
     if st.session_state.chat_history:
 
