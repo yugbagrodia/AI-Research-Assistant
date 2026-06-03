@@ -4,6 +4,10 @@ An AI-powered research paper analysis tool built using Python, Streamlit, Google
 
 The application allows users to upload research papers in PDF format, generate structured insights, ask questions about the paper, and download professional analysis reports.
 
+## 🌐 Live Demo
+
+🔗 https://ai-research-assistant-yug.streamlit.app/
+
 ---
 
 ## 🚀 Features
