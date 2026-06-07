@@ -124,17 +124,6 @@ streamlit run app.py
 
 ---
 
-## 📈 Future Improvements
-
-* Full-paper analysis using chunking
-* Multi-paper comparison
-* Citation extraction
-* Research paper recommendation system
-* Advanced Retrieval-Augmented Generation (RAG)
-* Online deployment and public access
-
----
-
 ## 👨‍💻 Author
 
-Developed by Yug Bagrodia as part of AI/ML learning and research exploration.
+Developed by Yug Bagrodia 
